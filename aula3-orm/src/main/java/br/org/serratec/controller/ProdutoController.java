@@ -3,6 +3,8 @@ package br.org.serratec.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +51,8 @@ public class ProdutoController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Produto inserir(@RequestBody Produto produto) {
+	                       // A anotação @Valid deve ser usada imediatamente antes do que se deve validar, nesse caso o @RequestBody (Não esquecer que há uma anotaçaõ correlacionada no atributo da classe model)
+	public Produto inserir(@Valid @RequestBody Produto produto) {
 		return produtoRepository.save(produto); //Passamos como parâmetro a entidade produto (Entidade é a classe representada no banco de dados)
 	}
 	
@@ -63,5 +66,15 @@ public class ProdutoController {
 		return ResponseEntity.noContent().build(); // Quando não existe, retornar "noContent"			
 	}
 	
+	@PutMapping("{id}")                                             // A anotação @Valid deve ser usada imediatamente antes do que se deve validar, nesse caso o @RequestBody (Não esquecer que há uma anotaçaõ correlacionada no atributo da classe model)
+	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto) {
+		if (!produtoRepository.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		produto.setId(id);
+		produto = produtoRepository.save(produto);
+		return ResponseEntity.ok(produto);
+
+	}
 
 }
