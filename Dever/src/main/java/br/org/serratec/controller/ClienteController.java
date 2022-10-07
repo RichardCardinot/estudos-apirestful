@@ -3,6 +3,8 @@ package br.org.serratec.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,17 +38,17 @@ public class ClienteController {
 	}
 
 	@PostMapping()
-	public Cliente cadastrarCliente(@RequestBody Cliente cliente) {
+	public Cliente cadastrarCliente(@Valid @RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}
 
 	@PostMapping("/salvarClientes")
-	public List<Cliente> cadastrarClientes(@RequestBody List<Cliente> clientes) {
+	public List<Cliente> cadastrarClientes(@Valid @RequestBody List<Cliente> clientes) {
 		return clienteRepository.saveAll(clientes);
 	}
 
 	@PutMapping("{id}")
-	public Cliente atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+	public Cliente atualizarCliente(@PathVariable Long id, @Valid @RequestBody Cliente cliente) {
 		if (clienteRepository.findById(id).isPresent()) {
 			cliente.setId(id);
 			return clienteRepository.save(cliente);
