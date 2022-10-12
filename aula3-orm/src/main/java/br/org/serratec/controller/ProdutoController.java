@@ -32,7 +32,7 @@ public class ProdutoController {
 	public List<Produto> listar() {
 		return produtoRepository.findAll(); // Retorna todos os produtos do banco de dados. Usando o produtoRepository estamos
 		                                    // utilizando o repositório e ele criando o "select * from produto" no postgre.
-	} 
+	}
 	
 	@GetMapping("{id}")
 	public ResponseEntity<Produto> buscar(@PathVariable Long id) {
@@ -47,7 +47,7 @@ public class ProdutoController {
 					// Usamos o ResponseEntity.notFound para retornar o status 200, mas como ele não ter o retorno padrão no formato
 					// ResponseEntity, temos que usar o .build() para converter.
 		                                    
-	} 
+	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -66,7 +66,7 @@ public class ProdutoController {
 		return ResponseEntity.noContent().build(); // Quando não existe, retornar "noContent"			
 	}
 	
-	@PutMapping("{id}")                                             // A anotação @Valid deve ser usada imediatamente antes do que se deve validar, nesse caso o @RequestBody (Não esquecer que há uma anotaçaõ correlacionada no atributo da classe model)
+	@PutMapping("{id}")                                          // A anotação @Valid deve ser usada imediatamente antes do que se deve validar, nesse caso o @RequestBody (Não esquecer que há uma anotaçaõ correlacionada no atributo da classe model)
 	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto) {
 		if (!produtoRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
@@ -74,7 +74,6 @@ public class ProdutoController {
 		produto.setId(id);
 		produto = produtoRepository.save(produto);
 		return ResponseEntity.ok(produto);
-
 	}
 
 }

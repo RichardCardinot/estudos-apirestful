@@ -1,0 +1,18 @@
+2022-10-11 19:05:06 jdbc[74]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FORNECEDOR" not found; SQL statement:
+DROP TABLE FORNECEDOR [42102-214]
+2022-10-11 19:05:07 jdbc[74]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FORNECEDOR" not found; SQL statement:
+DROP TABLE FORNECEDOR [42102-214]
+2022-10-11 19:07:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PESSOA_FISICA" not found; SQL statement:
+drop table pessoa_fisica [42102-214]
+2022-10-11 19:07:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PESSOA_JURIDICA" not found; SQL statement:
+drop table pessoa_juridica [42102-214]
+2022-10-11 19:08:40 jdbc[34]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PESSOA_FISICA" not found; SQL statement:
+drop table pessoa_fisica [42102-214]
+2022-10-11 19:08:40 jdbc[34]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PESSOA_JURIDICA" not found; SQL statement:
+drop table pessoa_juridica [42102-214]
