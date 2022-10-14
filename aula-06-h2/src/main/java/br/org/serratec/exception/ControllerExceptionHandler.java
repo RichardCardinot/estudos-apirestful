@@ -15,7 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
-@ControllerAdvice // Anotação que pede para acompanhar os exceptions(Erros)
+@ControllerAdvice // Anotação que pede para que todas as exceptions(Erros) sejam acompanhadas.
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@Override
