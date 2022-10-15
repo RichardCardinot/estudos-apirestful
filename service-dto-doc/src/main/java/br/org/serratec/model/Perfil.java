@@ -5,32 +5,29 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Usuario {
+public class Perfil {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
-	private Long idUsuario;
+	@Column(name = "id_perfil")
+	private Long idPerfil;
 	private String nome;
-	private String email;
-	private String senha;
 	
-	@OneToMany(mappedBy = "id.usuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "id.perfil")
 	private Set<UsuarioPerfil> usuarioPerfil = new HashSet<>(); // Set é uma lista que não permite elementos duplicados
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public Long getIdPerfil() {
+		return idPerfil;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdPerfil(Long idPerfil) {
+		this.idPerfil = idPerfil;
 	}
 
 	public String getNome() {
@@ -41,22 +38,6 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	public Set<UsuarioPerfil> getUsuarioPerfil() {
 		return usuarioPerfil;
 	}
@@ -64,7 +45,5 @@ public class Usuario {
 	public void setUsuarioPerfil(Set<UsuarioPerfil> usuarioPerfil) {
 		this.usuarioPerfil = usuarioPerfil;
 	}
-	
-	
 
 }

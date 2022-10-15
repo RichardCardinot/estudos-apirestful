@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.org.serratec.dto.UsuarioDTO;
+import br.org.serratec.dto.UsuarioInserirDTO;
 import br.org.serratec.exception.EmailException;
-import br.org.serratec.model.Usuario;
 import br.org.serratec.service.UsuarioService;
 
 @RestController
@@ -24,20 +25,21 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 
 	@GetMapping
-	public ResponseEntity<List<Usuario>> listar() {
+	// Mudamos para o retorno ser do tipo UsuarioDTO
+	public ResponseEntity<List<UsuarioDTO>> listar() {
 		return ResponseEntity.ok(usuarioService.listar());
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> inserir(@RequestBody Usuario usuario) {
+	public ResponseEntity<Object> inserir(@RequestBody UsuarioInserirDTO usuarioInserirDTO) {
 
 		try {
-			usuario = usuarioService.inserir(usuario);
+			UsuarioDTO usuarioDTO = usuarioService.inserir(usuarioInserirDTO);
 
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-					.buildAndExpand(usuario.getIdUsuario()).toUri();
+					.buildAndExpand(usuarioDTO.getId()).toUri();
 
-			return ResponseEntity.created(uri).body(usuario);
+			return ResponseEntity.created(uri).body(usuarioDTO);
 
 		} catch (EmailException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
