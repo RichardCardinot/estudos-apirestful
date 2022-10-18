@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.config.MailConfig;
 import br.org.serratec.dto.UsuarioDTO;
 import br.org.serratec.dto.UsuarioInserirDTO;
 import br.org.serratec.exception.EmailException;
@@ -31,6 +32,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private PerfilService perfilService;
+	
+	@Autowired
+	private MailConfig mailConfig;
 	
 	// Mudamos para o retorno ser do tipo UsuarioDTO
 	public List<UsuarioDTO> listar() {
@@ -72,6 +76,8 @@ public class UsuarioService {
 		}
 		
 		usuarioPerfilRepository.saveAll(usuarioInserirDTO.getUsuariosPerfil());
+		
+		mailConfig.sendEmail(usuario.getEmail(), "Cadastro de Usuário", usuario.toString()); // Efetua o envio do e-mail após o cadastro ser realizado.
 		
 		return new UsuarioDTO(usuario);
 		
